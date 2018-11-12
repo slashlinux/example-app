@@ -6,7 +6,6 @@ RUN apt-get update
 
 # install apache server
 RUN apt-get install -y apache2
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install apache2 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl php5-ldap curl lynx-cur
 # Enable apache mods.
 RUN php5enmod openssl
 RUN a2enmod php5
