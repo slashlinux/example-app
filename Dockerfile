@@ -7,9 +7,6 @@ RUN apt-get update
 # install apache server
 RUN apt-get install -y apache2
 # Enable apache mods.
-RUN php5enmod openssl
-RUN a2enmod php5
-RUN a2enmod rewrite
 COPY index.html /var/www/html
 CMD [“/usr/sbin/apache2”, “-D”, “FOREGROUND”]
 EXPOSE 80
