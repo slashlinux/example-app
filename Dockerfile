@@ -8,14 +8,16 @@ RUN apt-get update
 RUN apt-get install -y apache2
 # Enable apache mods.
 COPY index.html /var/www/html
-CMD [“/usr/sbin/apache2”, “-D”, “FOREGROUND”]
+CMD [“/usr/sbin/apache2ctl”, “-D”, “FOREGROUND”]
 EXPOSE 80
 
 # install ssh server
 RUN apt-get install -y  openssh-server
 RUN mkdir /var/run/sshd
-RUN echo 'root:screencast' | chpasswd
+RUN echo 'root:p4r4gin4' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin/PermitRootLogin/g' /etc/ssh/sshd_config
+RUN /etc/init.d/ssh restart 
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
